@@ -27,7 +27,7 @@ public class Calculator implements ActionListener{
 
         frame = new JFrame("Scientific Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(450, 550);
+        frame.setSize(450, 600);
         frame.setLayout(null);
 
         // txtfield ry8miseis
@@ -125,16 +125,19 @@ public class Calculator implements ActionListener{
         panel.add(subButton);
         panel.add(addButton);
         //  1, 2, 3, ., =
+        panel.add(numberButtons[0]);
         panel.add(numberButtons[1]);
         panel.add(numberButtons[2]);
         panel.add(numberButtons[3]);
         panel.add(decButton);
-        panel.add(equButton);
+        //panel.add(equButton);
 
 
         frame.add(panel);
         frame.add(textfield);
         // delButton, clrButton, negButton, cosButton efygan apo do
+        equButton.setBounds(20, 490, 395, 50);
+        frame.add(equButton);
         frame.setVisible(true);
     }
 
@@ -277,4 +280,5 @@ public class Calculator implements ActionListener{
     }
 
 }
+
 
