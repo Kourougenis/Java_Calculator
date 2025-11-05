@@ -50,6 +50,7 @@ public class Calculator implements ActionListener{
         sinButton = new JButton("sin");
         tanButton = new JButton("tan");
         logButton = new JButton("log");
+        piButton = new JButton("π");
         sqrtButton = new JButton("sqrt");
         powButton = new JButton("^");
 
@@ -276,3 +277,4 @@ public class Calculator implements ActionListener{
     }
 
 }
+
