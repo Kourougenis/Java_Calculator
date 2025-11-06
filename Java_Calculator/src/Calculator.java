@@ -50,7 +50,7 @@ public class Calculator implements ActionListener{
         sinButton = new JButton("sin");
         tanButton = new JButton("tan");
         logButton = new JButton("log");
-        piButton = new JButton("π");
+        piButton = new JButton("pi");
         sqrtButton = new JButton("sqrt");
         powButton = new JButton("^");
 
@@ -216,7 +216,7 @@ public class Calculator implements ActionListener{
         }
          // dynamh
         if(e.getSource()==powButton) {
-            num1 = Double.parseDouble(textField.getText());
+            num1 = Double.parseDouble(textfield.getText());
             operator = '^';
             textfield.setText("");
         }
@@ -280,8 +280,5 @@ public class Calculator implements ActionListener{
     }
 
 }
-
-
-
 
 
