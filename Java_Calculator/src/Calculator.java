@@ -216,7 +216,7 @@ public class Calculator implements ActionListener{
         }
          // dynamh
         if(e.getSource()==powButton) {
-            num1 = Double.parseDouble.(textField.getText());
+            num1 = Double.parseDouble(textField.getText());
             operator = '^';
             textfield.setText("");
         }
@@ -280,6 +280,7 @@ public class Calculator implements ActionListener{
     }
 
 }
+
 
 
 
