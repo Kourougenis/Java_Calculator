@@ -243,7 +243,7 @@ public class Calculator implements ActionListener{
                 displayError("Invalid number format");
             }
         }
-        if(e.getSource()==divButton) {;
+        if(e.getSource()==divButton) {
             if (operatorJustPressed) {
                 displayError("Cannot use two operators in a row");
                 return;
