@@ -308,8 +308,6 @@ public class Calculator implements ActionListener{
                 num1=result;
             } catch (NumberFormatException ex) {
                 textfield.setText("Error");
-            } catch (ArithmeticException ex) {
-                textfield.setText("Error");
             }
         }
 
@@ -324,7 +322,7 @@ public class Calculator implements ActionListener{
 
         if(e.getSource()==delButton) {
             String string = textfield.getText();
-            if (string.length() > 0) {
+            if (!string.isEmpty()) {
                 textfield.setText(string.substring(0, string.length() - 1));
             }
         }
@@ -335,7 +333,7 @@ public class Calculator implements ActionListener{
                 temp*=-1;
                 textfield.setText(String.valueOf(temp));
             } catch (NumberFormatException ex) {
-
+                textfield.setText("Error");
             }
         }
     }
