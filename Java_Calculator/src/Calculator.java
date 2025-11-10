@@ -201,7 +201,6 @@ public class Calculator implements ActionListener{
         }
 
         if(e.getSource()==addButton) {
-            String currentText = textfield.getText();
             if (operatorJustPressed) {
                     displayError("Cannot use two operators in a row");
                     return;
@@ -217,7 +216,6 @@ public class Calculator implements ActionListener{
 
         }
         if(e.getSource()==subButton) {
-            String currentText = textfield.getText();
             if (operatorJustPressed) {
                 displayError("Cannot use two operators in a row");
                 return;
@@ -232,7 +230,6 @@ public class Calculator implements ActionListener{
             }
         }
         if(e.getSource()==mulButton) {
-            String currentText = textfield.getText();
             if (operatorJustPressed) {
                 displayError("Cannot use two operators in a row");
                 return;
@@ -246,8 +243,7 @@ public class Calculator implements ActionListener{
                 displayError("Invalid number format");
             }
         }
-        if(e.getSource()==divButton) {
-            String currentText = textfield.getText();
+        if(e.getSource()==divButton) {;
             if (operatorJustPressed) {
                 displayError("Cannot use two operators in a row");
                 return;
