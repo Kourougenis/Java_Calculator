@@ -2,26 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
 public class Calculator implements ActionListener{
 
 
     JFrame frame;
     JTextField textfield;
     JButton[] numberButtons = new JButton[10];
-
     JButton[] functionButtons = new JButton[16];
-
-
     JButton addButton,subButton,mulButton,divButton;
     JButton decButton, equButton, delButton, clrButton, negButton;
-
-
     JButton cosButton, sinButton, tanButton, logButton, piButton, sqrtButton, powButton;
-
     JPanel panel;
     Font myFont = new Font("Ink Free",Font.BOLD,20);
     double num1=0,num2=0,result=0;
     char operator;
+
+    private boolean operatorJustPressed = false;
 
     Calculator(){
 
@@ -140,6 +137,12 @@ public class Calculator implements ActionListener{
         frame.add(equButton);
         frame.setVisible(true);
     }
+    // method to display error messages
+    private void displayError(String message){ textfield.setText("Error: " + message);}
+    // helper method to check if a character is an operator
+    //private boolean isOperator(char ch){ return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^'; }
+    // flag to track if an operator was pressed
+    //private boolean isOperatorPressed = false;
 
 
     @Override
@@ -147,6 +150,7 @@ public class Calculator implements ActionListener{
         for(int i=0;i<10;i++) {
             if(e.getSource() == numberButtons[i]) {
                 textfield.setText(textfield.getText().concat(String.valueOf(i)));
+                operatorJustPressed = false; //reset the flag
             }
         }
 
@@ -193,32 +197,82 @@ public class Calculator implements ActionListener{
         // binary operators
         if(e.getSource()==decButton) {
             textfield.setText(textfield.getText().concat("."));
+            operatorJustPressed = false;
         }
+
         if(e.getSource()==addButton) {
-            num1 = Double.parseDouble(textfield.getText());
-            operator ='+';
-            textfield.setText("");
+            if (operatorJustPressed) {
+                    displayError("Cannot use two operators in a row");
+                    return;
+                }
+            try{
+                num1 = Double.parseDouble(textfield.getText());
+                operator ='+';
+                textfield.setText("");
+                operatorJustPressed = true; //set the flag
+            } catch (NumberFormatException ex) {
+                displayError("Invalid number format");
+            }
+
         }
         if(e.getSource()==subButton) {
-            num1 = Double.parseDouble(textfield.getText());
-            operator ='-';
-            textfield.setText("");
+            if (operatorJustPressed) {
+                displayError("Cannot use two operators in a row");
+                return;
+            }
+            try{
+                num1 = Double.parseDouble(textfield.getText());
+                operator ='-';
+                textfield.setText("");
+                operatorJustPressed = true; //set the flag
+            } catch (NumberFormatException ex) {
+                displayError("Invalid number format");
+            }
         }
         if(e.getSource()==mulButton) {
-            num1 = Double.parseDouble(textfield.getText());
-            operator ='*';
-            textfield.setText("");
+            if (operatorJustPressed) {
+                displayError("Cannot use two operators in a row");
+                return;
+            }
+            try{
+                num1 = Double.parseDouble(textfield.getText());
+                operator ='*';
+                textfield.setText("");
+                operatorJustPressed = true; //set the flag
+            } catch (NumberFormatException ex) {
+                displayError("Invalid number format");
+            }
         }
         if(e.getSource()==divButton) {
-            num1 = Double.parseDouble(textfield.getText());
-            operator ='/';
-            textfield.setText("");
+            if (operatorJustPressed) {
+                displayError("Cannot use two operators in a row");
+                return;
+            }
+            try{
+                num1 = Double.parseDouble(textfield.getText());
+                operator ='/';
+                textfield.setText("");
+                operatorJustPressed = true; //set the flag
+            } catch (NumberFormatException ex) {
+                displayError("Invalid number format");
+            }
+
         }
          // dynamh
         if(e.getSource()==powButton) {
-            num1 = Double.parseDouble(textfield.getText());
-            operator = '^';
-            textfield.setText("");
+            if (operatorJustPressed){
+                displayError("Cannot use two operators in a row");
+                return;
+            }
+
+            try{
+                num1 = Double.parseDouble(textfield.getText());
+                operator = '^';
+                textfield.setText("");
+                operatorJustPressed = true;
+            } catch (NumberFormatException ex){
+                displayError("Invalid number format");
+            }
         }
 
         // =
@@ -250,8 +304,6 @@ public class Calculator implements ActionListener{
                 num1=result;
             } catch (NumberFormatException ex) {
                 textfield.setText("Error");
-            } catch (ArithmeticException ex) {
-                textfield.setText("Error");
             }
         }
 
@@ -261,20 +313,23 @@ public class Calculator implements ActionListener{
             num1 = 0;
             num2 = 0;
             operator = ' ';
+            operatorJustPressed = false;
         }
+
         if(e.getSource()==delButton) {
             String string = textfield.getText();
-            if (string.length() > 0) {
+            if (!string.isEmpty()) {
                 textfield.setText(string.substring(0, string.length() - 1));
             }
         }
+
         if(e.getSource()==negButton) {
             try {
                 double temp = Double.parseDouble(textfield.getText());
                 temp*=-1;
                 textfield.setText(String.valueOf(temp));
             } catch (NumberFormatException ex) {
-
+                textfield.setText("Error");
             }
         }
     }
