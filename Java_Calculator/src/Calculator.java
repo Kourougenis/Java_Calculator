@@ -221,10 +221,10 @@ public class Calculator implements ActionListener{
             textfield.setText("");
         }
 
-        // =
+// =
         if(e.getSource()==equButton) {
             try {
-                num2=Double.parseDouble(textfield.getText());
+                num2 = Double.parseDouble(textfield.getText());
                 switch(operator) {
                     case'+':
                         result=num1+num2;
@@ -237,7 +237,7 @@ public class Calculator implements ActionListener{
                         break;
                     case'/':
                         if (num2 == 0) {
-                            textfield.setText("Error (divided by 0");
+                            textfield.setText("Error (divided by 0)");
                             return;
                         }
                         result=num1/num2;
@@ -245,9 +245,16 @@ public class Calculator implements ActionListener{
                     case '^':
                         result = Math.pow(num1, num2);
                         break;
+                    default:
+                        result = num2; // αν δεν έχει operator, απλώς εμφανίζει τον αριθμό που πάτησες
                 }
-                textfield.setText(String.valueOf(result));
-                num1=result;
+                if (result == (long) result) {
+                    textfield.setText(String.valueOf((long) result));
+                } else {
+                    textfield.setText(String.valueOf(result));
+                }
+                num1 = result;
+                operator = ' '; // reset operator
             } catch (NumberFormatException ex) {
                 textfield.setText("Error");
             } catch (ArithmeticException ex) {
